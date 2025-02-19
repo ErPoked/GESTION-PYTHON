@@ -29,8 +29,8 @@ import sys
 import os
 
 def mostrar_menu():
-	print("Javier Chaparro Rivas")
-    print("\n--- Menú ---")
+	
+    print("\n--- Menú hecho por Javier Chaparro ---")
     print("1. Mostrar todos los clientes")
     print("2. Mostrar direcciones de un cliente específico")
     print("3. Buscar cliente por ID")
