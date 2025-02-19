@@ -1,26 +1,3 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-#
-#  manipulacion_docXML_JCR.py
-#  
-#  Copyright 2025 usuario <usuario@2asir15>
-#  
-#  This program is free software; you can redistribute it and/or modify
-#  it under the terms of the GNU General Public License as published by
-#  the Free Software Foundation; either version 2 of the License, or
-#  (at your option) any later version.
-#  
-#  This program is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#  GNU General Public License for more details.
-#  
-#  You should have received a copy of the GNU General Public License
-#  along with this program; if not, write to the Free Software
-#  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
-#  MA 02110-1301, USA.
-#  
-#  
 # CONTENIDO DEL ARCHIVO
 """
 <?xml version="1.0"?>
@@ -52,12 +29,14 @@ import sys
 import os
 
 def mostrar_menu():
+	print("Javier Chaparro Rivas")
     print("\n--- Menú ---")
     print("1. Mostrar todos los clientes")
     print("2. Mostrar direcciones de un cliente específico")
     print("3. Buscar cliente por ID")
     print("4. Salir")
 
+#Esta funcion carga el archivo xml completo
 def cargar_xml(archivo_xml):
     if not os.path.exists(archivo_xml):
         print(f"Error: El archivo {archivo_xml} no existe.")
@@ -70,10 +49,12 @@ def cargar_xml(archivo_xml):
         print(f"Error al parsear el archivo XML: {e}")
         sys.exit(1)
 
+#En esta funcion se muestra como se capta la informacion del nodo raiz
 def mostrar_clientes(NodoRaiz):
     for customer in NodoRaiz.findall('customer'):
         print(f"Cliente ID: {customer.get('id')}, Nombre: {customer.find('name').text}")
 
+#se cargan los datos de un nodo hijo como las direcciones del cliente
 def mostrar_direcciones_cliente(NodoRaiz, cliente_id):
     for customer in NodoRaiz.findall('customer'):
         if customer.get('id') == cliente_id:
@@ -86,6 +67,7 @@ def mostrar_direcciones_cliente(NodoRaiz, cliente_id):
             return
     print("Cliente no encontrado.")
 
+#Se busca la id del cliente
 def buscar_cliente_por_id(NodoRaiz, cliente_id):
     for customer in NodoRaiz.findall('customer'):
         if customer.get('id') == cliente_id:
@@ -93,8 +75,9 @@ def buscar_cliente_por_id(NodoRaiz, cliente_id):
             return
     print("Cliente no encontrado.")
 
+#menu
 def main(args):
-    archivo_xml = "JCR_ejemplo.xml"
+    archivo_xml = input("Inserte la ruta del archivo y su nombre: ")
     NodoRaiz = cargar_xml(archivo_xml)
     
     while True:
